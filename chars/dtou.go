@@ -60,33 +60,27 @@ func ParseUint64(s string) (uint64, bool) {
 		r = r*10 + uint64(b)
 	}
 
+	if ovf == 0 {
+		return r, true
+	}
+
 	// If ovf == 0, the loop above would've handled all characters already since it was
 	// impossible for it to overflow. This last pass is on the last character, which can
 	// cause an overflow.
-	if ovf == 1 {
-		if r >= uint64Cutoff {
-			// Mul would overflow.
-			return uint64Max, false
-		}
+	// Technically n is always 19, but the 1.12 compiler would insert a bounds check.
+	b = s[n] - '0'
 
-		b = s[n] - '0' // Technically n is always 19, but the 1.12 compiler would do a bounds-check.
+	// Max    is 18446744073709551615, last digit can't be > 5 or ADD would overflow.
+	// Cutoff is 1844674407370955161 accordingly.
+	if r > uint64Cutoff || b > 5 {
 		if b > 9 {
-			// Syntax error.
 			return 0, false
 		}
 
-		r *= 10
-		v := r + uint64(b)
-
-		if v < r {
-			// Overflow.
-			return uint64Max, false
-		}
-
-		r = v
+		return uint64Max, false
 	}
 
-	return r, true
+	return r*10 + uint64(b), true
 }
 
 // ParseUint32 takes an unsigned integer encoded as base10 (decimal) and converts it
@@ -132,27 +126,23 @@ func ParseUint32(s string) (uint32, bool) {
 		r = r*10 + uint32(b)
 	}
 
-	if ovf == 1 {
-		if r >= uint32Cutoff {
-			return uint32Max, false
-		}
+	if ovf == 0 {
+		return r, true
+	}
 
-		b = s[n] - '0'
+	b = s[n] - '0'
+
+	// Max    is 4294967295, last digit can't be > 5 or ADD would overflow.
+	// Cutoff is 429496729 accordingly.
+	if r > uint32Cutoff || b > 5 {
 		if b > 9 {
 			return 0, false
 		}
 
-		r *= 10
-		v := r + uint32(b)
-
-		if v < r {
-			return uint32Max, false
-		}
-
-		r = v
+		return uint32Max, false
 	}
 
-	return r, true
+	return r*10 + uint32(b), true
 }
 
 // ParseUint16 takes an unsigned integer encoded as base10 (decimal) and converts it
@@ -198,27 +188,23 @@ func ParseUint16(s string) (uint16, bool) {
 		r = r*10 + uint16(b)
 	}
 
-	if ovf == 1 {
-		if r >= uint16Cutoff {
-			return uint16Max, false
-		}
+	if ovf == 0 {
+		return r, true
+	}
 
-		b = s[n] - '0'
+	b = s[n] - '0'
+
+	// Max    is 65535, last digit can't be > 5 or ADD would overflow.
+	// Cutoff is 6553 accordingly.
+	if r > uint16Cutoff || b > 5 {
 		if b > 9 {
 			return 0, false
 		}
 
-		r *= 10
-		v := r + uint16(b)
-
-		if v < r {
-			return uint16Max, false
-		}
-
-		r = v
+		return uint16Max, false
 	}
 
-	return r, true
+	return r*10 + uint16(b), true
 }
 
 // ParseUint8 takes an unsigned integer encoded as base10 (decimal) and converts it

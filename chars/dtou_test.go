@@ -145,9 +145,15 @@ func TestParseUint8(t *testing.T) {
 	}
 }
 
-func BenchmarkStrconv8Max(b *testing.B) {
+func BenchmarkStrconvParse8Max(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec8max, 10, 8)
+	}
+}
+
+func BenchmarkStrconvAtoi8Max(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec8max)
 	}
 }
 
@@ -157,9 +163,15 @@ func BenchmarkRush8Max(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv8Mid(b *testing.B) {
+func BenchmarkStrconvParse8Mid(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec8mid, 10, 8)
+	}
+}
+
+func BenchmarkStrconvAtoi8Mid(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec8mid)
 	}
 }
 
@@ -169,9 +181,15 @@ func BenchmarkRush8Mid(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv8Digit(b *testing.B) {
+func BenchmarkStrconvParse8Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(digit, 10, 8)
+	}
+}
+
+func BenchmarkStrconvAtoi8Digit(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(digit)
 	}
 }
 
@@ -181,9 +199,15 @@ func BenchmarkRush8Digit(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv16Max(b *testing.B) {
+func BenchmarkStrconvParse16Max(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec16max, 10, 16)
+	}
+}
+
+func BenchmarkStrconvAtoi16Max(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec16max)
 	}
 }
 
@@ -193,9 +217,15 @@ func BenchmarkRush16Max(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv16Mid(b *testing.B) {
+func BenchmarkStrconvParse16Mid(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec16mid, 10, 16)
+	}
+}
+
+func BenchmarkStrconvAtoi6Mid(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec16mid)
 	}
 }
 
@@ -205,9 +235,15 @@ func BenchmarkRush16Mid(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv16Digit(b *testing.B) {
+func BenchmarkStrconvParse16Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(digit, 10, 16)
+	}
+}
+
+func BenchmarkStrconvAtoi16Digit(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(digit)
 	}
 }
 
@@ -217,9 +253,15 @@ func BenchmarkRush16Digit(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv32Max(b *testing.B) {
+func BenchmarkStrconvParse32Max(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec32max, 10, 32)
+	}
+}
+
+func BenchmarkStrconvAtoi32Max(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec32max)
 	}
 }
 
@@ -229,9 +271,15 @@ func BenchmarkRush32Max(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv32Mid(b *testing.B) {
+func BenchmarkStrconvParse32Mid(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec32mid, 10, 32)
+	}
+}
+
+func BenchmarkStrconvAtoi32Mid(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec32mid)
 	}
 }
 
@@ -241,9 +289,15 @@ func BenchmarkRush32Mid(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv32Digit(b *testing.B) {
+func BenchmarkStrconvParse32Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(digit, 10, 32)
+	}
+}
+
+func BenchmarkStrconvAtoi32Digit(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(digit)
 	}
 }
 
@@ -253,9 +307,15 @@ func BenchmarkRush32Digit(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv64Max(b *testing.B) {
+func BenchmarkStrconvParse64Max(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec64max, 10, 64)
+	}
+}
+
+func BenchmarkStrconvAtoi64Max(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec64max)
 	}
 }
 
@@ -265,9 +325,15 @@ func BenchmarkRush64Max(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv64Mid(b *testing.B) {
+func BenchmarkStrconvParse64Mid(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(dec64mid, 10, 64)
+	}
+}
+
+func BenchmarkStrconvAtoi64Mid(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(dec64mid)
 	}
 }
 
@@ -277,9 +343,15 @@ func BenchmarkRush64Mid(b *testing.B) {
 	}
 }
 
-func BenchmarkStrconv64Digit(b *testing.B) {
+func BenchmarkStrconvParse64Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = strconv.ParseUint(digit, 10, 64)
+	}
+}
+
+func BenchmarkStrconvAtoi64Digit(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.Atoi(digit)
 	}
 }
 
