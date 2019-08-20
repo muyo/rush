@@ -8,7 +8,8 @@ import (
 const (
 	dec64max = "18446744073709551615"
 	dec64mid = "1844674407"
-	dec32    = "4294967295"
+	dec32max = "4294967295"
+	dec32mid = "429496"
 	dec16max = "65535"
 	dec16mid = "655"
 	dec8max  = "255"
@@ -16,26 +17,58 @@ const (
 	digit    = "9"
 )
 
-func TestParseUint8(t *testing.T) {
+func TestParseUint64(t *testing.T) {
 	for _, c := range []struct {
 		name       string
 		in         string
-		expected   uint8
+		expected   uint64
 		expectedOk bool
 	}{
 		{"empty", "", 0, false},
 		{"min", "0", 0, true},
-		{"mid", "25", 25, true},
-		{"max", "255", 255, true},
-		{"overflow-len", "2555", maxUint8, false},
-		{"overflow-num", "300", maxUint8, false},
-		{"syntax", "2a6", 0, false},
+		{"mid", dec64mid, 1844674407, true},
+		{"max", dec64max, uint64Max, true},
+		{"overflow-len", "984467440737095516150", uint64Max, false},
+		{"overflow-num", "98446744073709551615", uint64Max, false},
+		{"syntax", "984467dddddd", 0, false},
 	} {
 		c := c
 		t.Run(c.name, func(t *testing.T) {
 			t.Parallel()
 
-			actual, actualOk := ParseUint8(c.in)
+			actual, actualOk := ParseUint64(c.in)
+
+			if actual != c.expected {
+				t.Errorf("expected [%d], got [%d]", c.expected, actual)
+			}
+
+			if actualOk != c.expectedOk {
+				t.Errorf("expected [%t], got [%t]", c.expectedOk, actualOk)
+			}
+		})
+	}
+}
+
+func TestParseUint32(t *testing.T) {
+	for _, c := range []struct {
+		name       string
+		in         string
+		expected   uint32
+		expectedOk bool
+	}{
+		{"empty", "", 0, false},
+		{"min", "0", 0, true},
+		{"mid", dec32mid, 429496, true},
+		{"max", dec32max, uint32Max, true},
+		{"overflow-len", "42949672950", uint32Max, false},
+		{"overflow-num", "5294967295", uint32Max, false},
+		{"syntax", "4w9x9x7x95", 0, false},
+	} {
+		c := c
+		t.Run(c.name, func(t *testing.T) {
+			t.Parallel()
+
+			actual, actualOk := ParseUint32(c.in)
 
 			if actual != c.expected {
 				t.Errorf("expected [%d], got [%d]", c.expected, actual)
@@ -57,10 +90,10 @@ func TestParseUint16(t *testing.T) {
 	}{
 		{"empty", "", 0, false},
 		{"min", "0", 0, true},
-		{"mid", "655", 655, true},
-		{"max", "65535", 65535, true},
-		{"overflow-len", "655355", maxUint16, false},
-		{"overflow-num", "99999", maxUint16, false},
+		{"mid", dec16mid, 655, true},
+		{"max", dec16max, uint16Max, true},
+		{"overflow-len", "655355", uint16Max, false},
+		{"overflow-num", "99999", uint16Max, false},
 		{"syntax", "6aaa5", 0, false},
 	} {
 		c := c
@@ -80,26 +113,26 @@ func TestParseUint16(t *testing.T) {
 	}
 }
 
-func TestParseUint64(t *testing.T) {
+func TestParseUint8(t *testing.T) {
 	for _, c := range []struct {
 		name       string
 		in         string
-		expected   uint64
+		expected   uint8
 		expectedOk bool
 	}{
 		{"empty", "", 0, false},
 		{"min", "0", 0, true},
-		{"mid", "1844674407", 1844674407, true},
-		{"max", "18446744073709551615", 18446744073709551615, true},
-		{"overflow-len", "984467440737095516150", maxUint64, false},
-		{"overflow-num", "98446744073709551615", maxUint64, false},
-		{"syntax", "984467dddddd", 0, false},
+		{"mid", dec8mid, 25, true},
+		{"max", dec8max, uint8Max, true},
+		{"overflow-len", "2555", uint8Max, false},
+		{"overflow-num", "300", uint8Max, false},
+		{"syntax", "2a6", 0, false},
 	} {
 		c := c
 		t.Run(c.name, func(t *testing.T) {
 			t.Parallel()
 
-			actual, actualOk := ParseUint64(c.in)
+			actual, actualOk := ParseUint8(c.in)
 
 			if actual != c.expected {
 				t.Errorf("expected [%d], got [%d]", c.expected, actual)
@@ -181,6 +214,42 @@ func BenchmarkStrconv16Digit(b *testing.B) {
 func BenchmarkRush16Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_, _ = ParseUint16(digit)
+	}
+}
+
+func BenchmarkStrconv32Max(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.ParseUint(dec32max, 10, 32)
+	}
+}
+
+func BenchmarkRush32Max(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = ParseUint32(dec32max)
+	}
+}
+
+func BenchmarkStrconv32Mid(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.ParseUint(dec32mid, 10, 32)
+	}
+}
+
+func BenchmarkRush32Mid(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = ParseUint32(dec32mid)
+	}
+}
+
+func BenchmarkStrconv32Digit(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = strconv.ParseUint(digit, 10, 32)
+	}
+}
+
+func BenchmarkRush32Digit(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_, _ = ParseUint32(digit)
 	}
 }
 
