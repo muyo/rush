@@ -14,7 +14,7 @@ const (
 	dec16mid = "655"
 	dec8max  = "255"
 	dec8mid  = "25"
-	digit    = "9"
+	decDigit = "9"
 )
 
 func TestParseUint64(t *testing.T) {
@@ -183,19 +183,19 @@ func BenchmarkRush8Mid(b *testing.B) {
 
 func BenchmarkStrconvParse8Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.ParseUint(digit, 10, 8)
+		_, _ = strconv.ParseUint(decDigit, 10, 8)
 	}
 }
 
 func BenchmarkStrconvAtoi8Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.Atoi(digit)
+		_, _ = strconv.Atoi(decDigit)
 	}
 }
 
 func BenchmarkRush8Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = ParseUint8(digit)
+		_, _ = ParseUint8(decDigit)
 	}
 }
 
@@ -237,19 +237,19 @@ func BenchmarkRush16Mid(b *testing.B) {
 
 func BenchmarkStrconvParse16Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.ParseUint(digit, 10, 16)
+		_, _ = strconv.ParseUint(decDigit, 10, 16)
 	}
 }
 
 func BenchmarkStrconvAtoi16Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.Atoi(digit)
+		_, _ = strconv.Atoi(decDigit)
 	}
 }
 
 func BenchmarkRush16Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = ParseUint16(digit)
+		_, _ = ParseUint16(decDigit)
 	}
 }
 
@@ -291,19 +291,19 @@ func BenchmarkRush32Mid(b *testing.B) {
 
 func BenchmarkStrconvParse32Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.ParseUint(digit, 10, 32)
+		_, _ = strconv.ParseUint(decDigit, 10, 32)
 	}
 }
 
 func BenchmarkStrconvAtoi32Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.Atoi(digit)
+		_, _ = strconv.Atoi(decDigit)
 	}
 }
 
 func BenchmarkRush32Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = ParseUint32(digit)
+		_, _ = ParseUint32(decDigit)
 	}
 }
 
@@ -345,18 +345,18 @@ func BenchmarkRush64Mid(b *testing.B) {
 
 func BenchmarkStrconvParse64Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.ParseUint(digit, 10, 64)
+		_, _ = strconv.ParseUint(decDigit, 10, 64)
 	}
 }
 
 func BenchmarkStrconvAtoi64Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = strconv.Atoi(digit)
+		_, _ = strconv.Atoi(decDigit)
 	}
 }
 
 func BenchmarkRush64Digit(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		_, _ = ParseUint64(digit)
+		_, _ = ParseUint64(decDigit)
 	}
 }
