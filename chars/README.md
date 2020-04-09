@@ -62,7 +62,6 @@ BenchmarkRush32Digit-8              1000000000               2.26 ns/op         
 ```
 **chars.ParseUint16()**
 ```
-
 BenchmarkStrconvParse16Max-8        200000000               11.1 ns/op             0 B/op          0 allocs/op
 BenchmarkStrconvAtoi16Max-8         200000000                7.33 ns/op            0 B/op          0 allocs/op
 BenchmarkRush16Max-8                300000000                5.92 ns/op            0 B/op          0 allocs/op
@@ -115,7 +114,7 @@ Platform: go 1.14, i7 4770k @ 4.4GHz; ran at 2020/02/27; code included in test f
 ```
 BenchmarkStrconvAppendUint64-8                  39872275          30.0 ns/op             0 B/op          0 allocs/op
 BenchmarkStrconvFormatUint64-8                  24490545          50.1 ns/op            32 B/op          1 allocs/op
-BenchmarkRushCopyUint64-8                       47996928          24.7 ns/op             0 B/op          0 allocs/op
+BenchmarkRushCopyUint64-8                       47996928          22.7 ns/op             0 B/op          0 allocs/op
 
 BenchmarkStrconvAppendUint64Precomputed-8       210293774          5.71 ns/op            0 B/op          0 allocs/op
 BenchmarkStrconvFormatUint64Precomputed-8       364729335          3.30 ns/op            0 B/op          0 allocs/op
@@ -129,7 +128,7 @@ BenchmarkRushCopyUint64Tiny-8                   472303716          2.54 ns/op   
 ```
 BenchmarkStrconvAppendUint32-8      59977208                19.7 ns/op             0 B/op          0 allocs/op
 BenchmarkStrconvFormatUint32-8      32433133                37.5 ns/op            16 B/op          1 allocs/op
-BenchmarkRushCopyUint32-8           85328478                14.0 ns/op             0 B/op          0 allocs/op
+BenchmarkRushCopyUint32-8           85328478                13.8 ns/op             0 B/op          0 allocs/op
 ```
 **chars.CopyUint16()**
 ```

@@ -37,6 +37,18 @@ func CopyUint64(dst []byte, u uint64) int {
 		q uint64
 	)
 
+	for u >= 10000 {
+		q := u % 10000
+		u /= 10000
+
+		d1 := q / 100 * 2
+		d2 := q % 100 * 2
+		i -= 4
+
+		b[i], b[i+1] = smalls[d1], smalls[d1+1]
+		b[i+2], b[i+3] = smalls[d2], smalls[d2+1]
+	}
+
 	for u > smallsN {
 		q = u % 100 * 2
 		u /= 100
@@ -80,6 +92,18 @@ func CopyUint32(dst []byte, u uint32) int {
 		b [uint32Digits]byte
 		q uint32
 	)
+
+	for u >= 10000 {
+		q := u % 10000
+		u /= 10000
+
+		s1 := q / 100 * 2
+		s2 := q % 100 * 2
+		i -= 4
+
+		b[i], b[i+1] = smalls[s1], smalls[s1+1]
+		b[i+2], b[i+3] = smalls[s2], smalls[s2+1]
+	}
 
 	for u > smallsN {
 		q = u % 100 * 2
